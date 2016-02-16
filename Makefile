@@ -3,15 +3,15 @@ VERSION=1.0
 
 
 build:
-	docker build -t $(NAME):$(VERSION) .
+	docker build --rm -t $(NAME):$(VERSION) .
 
 
 run:
-	docker run -t -i $(NAME):$(VERSION)
+	docker run --rm -t -i $(NAME):$(VERSION) sh
 
 
 debug: build
-	docker run --rm -t -i $(NAME):$(VERSION) /bin/bash	
+	docker run --rm -t -i $(NAME):$(VERSION) /bin/sh
 
 
 .PHONY: build run debug
