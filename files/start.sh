@@ -40,7 +40,7 @@ start_node () {
 	x11vnc -forever -usepw -shared -rfbport ${VNC_PORT} -display $DISPLAY &
 	PID_X11VNC=$!
 
-	DISPLAY=$DISPLAY.0 java -jar /opt/selenium/selenium-server-standalone.jar    \
+	DISPLAY=$DISPLAY java -jar /opt/selenium/selenium-server-standalone.jar      \
 		-role node                                                                 \
 		-nodeConfig /opt/selenium/config.json                                      \
 		$@
