@@ -24,7 +24,7 @@ RUN apk add --no-cache --update firefox@testing
 RUN apk add --no-cache --update openjdk8-jre-base
 RUN chmod +x install-selenium.sh && sync && ./install-selenium.sh
 
-ADD files/start.sh .
+ADD files/start.sh start.sh
 RUN chmod +x start.sh
 ENTRYPOINT ["/usr/bin/tini", "-g", "--", "/tmp/start.sh"] #forward singals to all children
 CMD "hub"
