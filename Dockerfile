@@ -17,10 +17,12 @@ ENV SEL_PATCH 0
 
 WORKDIR /tmp
 ADD files/install*.sh /tmp/
-RUN chmod +x install.sh && ./install.sh
+# sync is required due to docker storage bug
+# https://github.com/docker/docker/issues/9547
+RUN chmod +x install.sh && sync && ./install.sh
 RUN apk add --no-cache --update firefox@testing
 RUN apk add --no-cache --update openjdk8-jre-base
-RUN chmod +x install-selenium.sh && ./install-selenium.sh
+RUN chmod +x install-selenium.sh && sync && ./install-selenium.sh
 
 ADD files/start.sh .
 RUN chmod +x start.sh
