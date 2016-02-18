@@ -13,8 +13,9 @@ echo 'seluser:secret' | chpasswd
 
 
 # XVFB as dummy X server
-apk add xvfb
+apk add xvfb dbus ttf-opensans@testing
 # TODO xrdp vino
+dbus-uuidgen > /var/lib/dbus/machine-id
 
 # x11vnc
 apk add x11vnc@testing

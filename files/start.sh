@@ -28,17 +28,22 @@ start_node () {
 	NODECONFIG
 
 	# XVFB as dummy X server
-	echo "starting Xvfb with DISPLAY=${DISPLAY} screen=${SCREEN} geometry=${GEOMETRY}"
+	echo "starting Xvfb DISPLAY=${DISPLAY} screen=${SCREEN} geometry=${GEOMETRY}"
 	Xvfb ${DISPLAY} -screen ${SCREEN} ${GEOMETRY}     \
-	  -ac -r -cc 4 -accessx                           \
-	  -xinerama +extension Composite                  \
-	  -extension RANDR +extension GLX                 &
+	  -r                                              \
+	  -ac                                             \
+	  -cc 4                                           \
+	  +accessx                                        \
+	  +xinerama                                       \
+	  +extension Composite                            \
+	  +extension RANDR                                \
+	  +extension GLX                                  &
 	PID_XVFB=$!
 
 	# x11vnc
-	echo starting x11vnc on display=$DISPLAY port=${VNC_PORT}
-	x11vnc -forever -usepw -shared -rfbport ${VNC_PORT} -display $DISPLAY &
-	PID_X11VNC=$!
+	# echo starting x11vnc on display=$DISPLAY port=${VNC_PORT}
+	# x11vnc -forever -usepw -shared -rfbport ${VNC_PORT} -display $DISPLAY &
+	# PID_X11VNC=$!
 
 	DISPLAY=$DISPLAY java -jar /opt/selenium/selenium-server-standalone.jar      \
 		-role node                                                                 \
